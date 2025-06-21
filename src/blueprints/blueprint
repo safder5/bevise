@@ -1,0 +1,140 @@
+# Global Team Marketplace Blueprint
+
+A planning document for building a platform where businesses can discover, evaluate, and hire pre-formed, skilled teams for project-based work such as software development, design, branding, content, or media.
+
+---
+
+## 1. Vision & Unique Value
+
+**Goal:**  
+Create a marketplace where businesses can easily find, compare, and hire skilled teams (not just individuals) ready for project-based work.
+
+**Unique Aspects:**  
+- Marketplace is for teams, not freelancers  
+- Focus on team portfolios and real project experience  
+- Direct connections between clients and teams  
+- Streamlined discovery and evaluation
+
+---
+
+## 2. Core Features (Functionality Blueprint)
+
+### A. For Businesses/Clients
+
+- **Homepage / Discovery**
+  - Feature categories, highlighted teams, recent projects
+- **Browse/Search Teams**
+  - Filters: category, skills, location, ratings, team size
+  - Search by keywords or industries
+- **Team Profiles**
+  - Team info: bio, skills, members, location/timezone
+  - Portfolio: past projects, case studies, testimonials
+  - Pricing models, availability calendar
+  - “Contact/Book This Team” button
+- **Direct Messaging / Inquiry**
+  - Message teams with questions or briefs
+- **Project Posting (Optional)**
+  - Post a project and invite teams to apply
+- **Shortlist & Compare**
+  - Save favorite teams, compare portfolios
+- **Hiring/Contracting**
+  - Start hiring process and confirm terms
+
+### B. For Teams
+
+- **Team Registration**
+  - Onboard as a team, add name, members, skills, bios
+- **Portfolio Management**
+  - Add/edit past projects, upload media, client feedback
+- **Availability & Pricing**
+  - Set project types, availability, rates
+- **Manage Inquiries**
+  - Respond to messages, accept/reject project invites
+- **Team Dashboard**
+  - Track inquiries, projects, feedback, reviews
+
+### C. Shared/Other
+
+- **Ratings & Reviews**
+  - Feedback after project completion (both sides)
+- **Admin Panel**
+  - Approve/vet teams, moderate, handle disputes
+
+---
+
+## 3. User Roles
+
+- **Business/Client:** Finds and hires teams
+- **Team:** Registers, manages profile, responds to clients
+- **Admin:** Oversees platform, verifies teams, moderates
+
+---
+
+## 4. User Journeys
+
+**Business/Client:**  
+Homepage → Browse/Search → View Team Profiles → Message/Book Team → Hire & Start Project → Review
+
+**Team:**  
+Register → Complete Profile & Portfolio → Receive Inquiries/Invites → Communicate → Get Hired → Deliver Project → Receive Review
+
+---
+
+## 5. Non-Functional Requirements
+
+- Fast and secure
+- Scalable for global users
+- Mobile and desktop friendly
+- Privacy/GDPR compliant
+- Accessible (usable by all)
+- (Optional) Internationalization support
+
+---
+
+## 6. Technical Architecture Overview
+
+- **Frontend:** User interface (React, Vue, etc.)
+- **Backend:** Business logic, APIs, authentication
+- **Database:** Users, teams, portfolios, projects, messages
+- **File Storage:** Images, portfolios, documents
+- **Messaging Service:** Real-time or email-based messages
+- **Admin Tools:** Team vetting, moderation
+
+---
+
+## 7. Development Steps (High Level)
+
+1. **Define Requirements:**  
+   Finalize features & user flows
+
+2. **Wireframe Key Pages:**  
+   Homepage, team profile, dashboards, search
+
+3. **Set Up Backend:**  
+   User/team/project models, API endpoints
+
+4. **Build Frontend:**  
+   Pages and components
+
+5. **Implement Messaging, Reviews, Admin Tools**
+
+6. **Testing & Deployment:**  
+   Internal testing, MVP launch, gather feedback
+
+---
+
+## 8. Ongoing Management
+
+- Issue tracking (bugs, features)
+- Documentation (how things work)
+- Regular data backups
+
+---
+
+## Notes
+
+- Use this document as a checklist and update as you go.
+- Break features into small, manageable tasks.
+- Ask for guidance on any unclear section or feature.
+
+---
