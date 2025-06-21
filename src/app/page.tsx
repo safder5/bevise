@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleButtonClick = () => {
-    router.push("/auth/login"); // Change to '/login' if you want to go to the login page
+    router.push("/signup"); // Change to '/login' if you want to go to the login page
   };
   console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
   return (
