@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { supabase } from "@/utils/supabaseClient";
 import {
   Container,
   Box,
@@ -12,27 +11,21 @@ import {
   Link,
 } from "@mui/material";
 
-export default function Signup() {
-  const { signup } = useAuth();
-  const router = useRouter();
+export default function ResetPassword() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
 
-    const { error } = await signup(email, password);
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) {
       setError(error.message);
     } else {
-      setSuccess(
-        "Signup successful! Please check your email to confirm your account."
-      );
-      setTimeout(() => router.push("/login"), 3000);
+      setSuccess("Password reset email sent! Please check your inbox.");
     }
   };
 
@@ -42,23 +35,14 @@ export default function Signup() {
         sx={{ mt: 8, p: 3, boxShadow: 2, borderRadius: 2, bgcolor: "white" }}
       >
         <Typography variant="h5" mb={2} align="center">
-          Sign Up
+          Reset Password
         </Typography>
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleReset}>
           <TextField
             label="Email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            margin="normal"
-            fullWidth
-            required
-          />
-          <TextField
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             margin="normal"
             fullWidth
             required
@@ -70,7 +54,7 @@ export default function Signup() {
             fullWidth
             sx={{ mt: 2 }}
           >
-            Sign Up
+            Send Reset Link
           </Button>
           {error && (
             <Alert severity="error" sx={{ my: 1 }}>
@@ -83,12 +67,9 @@ export default function Signup() {
             </Alert>
           )}
           <Box mt={2} textAlign="center">
-            <Typography variant="body2">
-              Already have an account?{" "}
-              <Link href="/login" underline="hover">
-                Sign in
-              </Link>
-            </Typography>
+            <Link href="/login" underline="hover">
+              Back to login
+            </Link>
           </Box>
         </form>
       </Box>

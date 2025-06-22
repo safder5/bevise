@@ -1,9 +1,20 @@
 "use client";
-
 import React, { useState } from "react";
-import { supabase } from "../../utils/supabaseClient"; // Adjust the path as necessary
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import {
+  Container,
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Alert,
+  Link,
+} from "@mui/material";
 
-const Login: React.FC = () => {
+export default function Login() {
+  const { login } = useAuth();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -11,47 +22,70 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
+    const { error } = await login(email, password);
     if (error) {
       setError(error.message);
     } else {
-      // Redirect or perform any action after successful login
-      console.log("Login successful");
+      router.push("/dashboard");
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
+    <Container maxWidth="xs">
+      <Box
+        sx={{ mt: 8, p: 3, boxShadow: 2, borderRadius: 2, bgcolor: "white" }}
+      >
+        <Typography variant="h5" mb={2} align="center">
+          Sign In
+        </Typography>
+        <form onSubmit={handleLogin}>
+          <TextField
+            label="Email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            margin="normal"
+            fullWidth
             required
           />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
+          <TextField
+            label="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            margin="normal"
+            fullWidth
             required
           />
-        </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit">Login</button>
-      </form>
-    </div>
+          {error && (
+            <Alert severity="error" sx={{ my: 1 }}>
+              {error}
+            </Alert>
+          )}
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 2 }}
+          >
+            Login
+          </Button>
+          <Box mt={2} textAlign="center">
+            <Link href="/reset-password" underline="hover">
+              Forgot password?
+            </Link>
+          </Box>
+          <Box mt={1} textAlign="center">
+            <Typography variant="body2">
+              Don&apos;t have an account?{" "}
+              <Link href="/signup" underline="hover">
+                Sign up
+              </Link>
+            </Typography>
+          </Box>
+        </form>
+      </Box>
+    </Container>
   );
-};
-
-export default Login;
+}
