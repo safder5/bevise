@@ -1,16 +1,29 @@
-import { Container, Typography, Box, Paper } from "@mui/material";
+"use client";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getOnboardingStep } from "@/utils/onboarding";
+import { CircularProgress, Box } from "@mui/material";
 
 export default function Dashboard() {
-  return (
-    <Container maxWidth="md" sx={{ mt: 6 }}>
-      <Paper elevation={3} sx={{ p: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Dashboard
-        </Typography>
-        <Typography>
-          Here you’ll see your teams, projects, and activity overview.
-        </Typography>
-      </Paper>
-    </Container>
-  );
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user) {
+      getOnboardingStep(user.id).then((step) => {
+        if (step !== "complete") router.push(`/onboarding/${step}`);
+      });
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user)
+    return (
+      <Box display="flex" justifyContent="center" mt={10}>
+        <CircularProgress />
+      </Box>
+    );
+
+  // ...actual dashboard content
+  return <div>Your Dashboard</div>;
 }

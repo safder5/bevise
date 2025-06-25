@@ -1,52 +1,47 @@
 "use client";
-
-import { useRouter } from "next/navigation";
 import {
-  Container,
-  Typography,
-  Box,
   Button,
+  Box,
+  Typography,
+  Stack,
 } from "@mui/material";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function LandingPage() {
   const router = useRouter();
 
-  const handleButtonClick = () => {
-    router.push("/signup"); // Change to '/login' if you want to go to the login page
-  };
-  console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL); //remove this later
   return (
-    <Container maxWidth="md" sx={{ mt: 6 }}>
-      <Box textAlign="center">
-        <Typography variant="h2" gutterBottom>
-          Welcome to Bevise!
-        </Typography>
-        <Typography variant="h5" color="text.secondary" gutterBottom>
-          Connect with top teams and showcase your work.
-        </Typography>
-        <Link href="/dashboard" passHref>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            sx={{ mt: 4 }}
-          >
-            Go to Dashboard
-          </Button>
-        </Link>
-      </Box>
-      {/* <Button variant="contained" color="primary" onClick={handleButtonClick}>
-        Get In
-      </Button> */}
-    </Container>
+    <Box textAlign="center" width="100%">
+      <Typography variant="h2" gutterBottom fontWeight="bold">
+        Welcome to Bevise
+      </Typography>
+      <Typography variant="h5" color="text.secondary" gutterBottom>
+        Accelerate your projects with collaborative teams of experts!
+      </Typography>
+      <Typography color="text.secondary" mb={4}>
+        Join as a buyer to find the best teams, or as a seller to create and
+        join high-impact teams.
+      </Typography>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={2}
+        justifyContent="center"
+      >
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => router.push("/login")}
+        >
+          Login
+        </Button>
+        <Button
+          variant="outlined"
+          size="large"
+          onClick={() => router.push("/signup")}
+        >
+          Sign Up
+        </Button>
+      </Stack>
+    </Box>
   );
 }
-{/* <main style={{ padding: 32 }}>
-      <Typography variant="h4" gutterBottom>
-        Welcome to MUI + Next.js!
-      </Typography>
-      <Button variant="contained" color="primary" onClick={handleButtonClick}>
-        Get Inn
-      </Button>
-    </main> */}

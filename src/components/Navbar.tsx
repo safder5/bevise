@@ -76,17 +76,16 @@ export default function Navbar() {
       >
         <List sx={{ width: 220 }}>
           {navLinks.map((link) => (
-            <Link href={link.href} key={link.href} passHref>
-              <ListItemButton
-                component={NextLink}
-                href = {link.href}
-                selected={pathname === link.href}
-                onClick={() => setDrawerOpen(false)}
-              >
-                <ListItemIcon>{link.icon}</ListItemIcon>
-                <ListItemText primary={link.label} />
-              </ListItemButton>
-            </Link>
+            <ListItemButton
+              key={link.href}
+              component={NextLink}
+              href={link.href}
+              selected={pathname === link.href}
+              onClick={() => setDrawerOpen(false)}
+            >
+              <ListItemIcon>{link.icon}</ListItemIcon>
+              <ListItemText primary={link.label} />
+            </ListItemButton>
           ))}
         </List>
       </Drawer>
